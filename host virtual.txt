@@ -1,0 +1,116 @@
+HOSTS VIRTUALES
+
+hosts virtuales
+sudo setenforce 0
+getenforce
+mkdir -p /var/www/alexcalle0609.com/html
+chown -R apache:apache /var/www/alexcalle0609.com/
+
+chmod -R 755 /var/www/
+sudo nano /var/www/romarioastudillo.com/html/index.html
+sudo nano /var/www/estefaniaaguilar1518.com/html/index.html
+sudo nano /etc/httpd/conf/httpd.conf
+
+-----------------------------
+<Virtualhost *:80>
+	  ServerName www.johannapilamunga.com
+	  ServerAlias johannapilamunga.com
+	  DocumentRoot /var/www/johannapilamunga.com/html
+        ErrorLog /var/www/johannapilamunga.com/error.log
+        CustomLog /var/www/johannapilamunga.com/request.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+        ServerName www.estefaniaaguilar1518.com
+	  ServerAlias estefaniaaguilar1518.com
+	  DocumentRoot /var/www/estefaniaaguilar1518.com/html
+        ErrorLog /var/www/estefaniaaguilar1518.com/error.log
+        CustomLog /var/www/estefaniaaguilar1518.com/request.log combined
+</VirtualHost>
+
+windows
+worpad como administrador
+C:\Windows\System32\drivers\etc\
+agregar la ip con los dominios
+192.168.9.133 www.estefaniaaguilar1518.com www.johannapilamunga.com
+
+
+systemctl restart httpd
+
+
+
+
+hosts virtuales
+sudo setenforce 0
+getenforce
+mkdir -p /var/www/alexcalle09.com/html
+mkdir -p /var/www/romarioastudillo09.com/html
+chown -R apache:apache /var/www/alexcalle09.com/
+chown -R apache:apache /var/www/romarioastudillo09.com/
+chmod -R 755 /var/www/
+sudo nano /var/www/alexcalle09.com/html/index.html
+sudo nano /var/www/romarioastudillo09.com/html/index.html
+sudo nano /etc/httpd/conf/httpd.conf
+
+-----------------------------
+<Virtualhost *:80>
+	  ServerName www.alexcalle09.com
+	  ServerAlias alexcalle09.com
+	  DocumentRoot /var/www/alexcalle09.com/html
+        ErrorLog /var/www/alexcalle09.com/error.log
+        CustomLog /var/www/alexcalle09.com/request.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+        ServerName www.romarioastudillo09.com
+	  ServerAlias romarioastudillo09.com
+	  DocumentRoot /var/www/romarioastudillo09.com/html
+        ErrorLog /var/www/romarioastudillo09.com/error.log
+        CustomLog /var/www/romarioastudillo09.com/request.log combined
+</VirtualHost>
+
+
+windows
+worpad como administrador
+C:\Windows\System32\drivers\etc\
+agregar la ip con los dominios
+192.168.116.130 www.alexcalle09.com www.romarioastudillo09
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

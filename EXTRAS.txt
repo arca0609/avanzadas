@@ -1,0 +1,33 @@
+EXTRAS
+//Aumentar espacio en disco. se hace en particion de VAR
+
+df -h
+
+pvcreate /dev/nvme0n2p1
+
+vgdisplay
+
+vgdisplay almalinux | grep "Free"
+
+vgextend almalinux /dev/nvme0n2p1
+vgdisplay almalinux | grep "Free"
+
+lvdisplay 
+
+lvextend -L+20G /dev/almalinux/var
+
+ext4 
+
+
+
+
+
+### TRABAJO FINAL DE PARCIAL ######
+Hasta 20 nov
+
+INVESTIGACION SOBRE OPEN STARLEVANTAR ESTRUCTURA, ROUTERS, A NIVEL DE NUBE
+
+OCUPAR OPEN STAT
+
+ocupar una infraestructura que ya existe, se les da por 45 dias de prueba
+documento y ademas como funciona en la parte real en esa palicacion open start, o mirantix, 

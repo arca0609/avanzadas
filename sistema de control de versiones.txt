@@ -1,0 +1,111 @@
+sistema de control de versiones
+Permite administrar cambios en un conjutno de archivos para tener un historial de todos los cambios
+beneficios:
+colaboraicion de personas
+responsabilidad y visibilidad
+trabajar forma aislada/ se lo carga al servidor
+trabajo remoto
+Tres tipos :
+lcoal
+central
+distribuida
+
+-utiliza una base de datos simple para dar seguiemiento a cambios que se hacen en archivos
+se almacena en un archivo principal llamado delta para ver los cambios
+el ususairo vuelbve, delta se cambia al archivo solicitado
+
+CENTRALIZADO
+misma arquitectura cliente servidor con base central y los clientes acceden a los archivos de esa base, el problema
+es que una persona debe esperar a al modificacion no se puede trabajar al mismo tiempo
+
+DISTRIBUIDO
+El cliente baja una version , realiza modificaciones y sube los archivos al servidor que se encuentra como un sistema de control de versiones distribuidas
+se descarga modifica y se sube
+
+GIT
+es una herramienta de codigo abierto para sistema de control de versiones. se puede instalar en cualquier sistema operativo
+la diferencia es que almacena como oinstantaneas en lugares diferentes, descarga la info, modifica y sube al servidor
+esta organizado en 3 etapas, 3 estados
+etpas:
+repositorio, directorio git workin directory
+direcotior de trabaj
+area de ensayo
+3 estados
+commited
+modified 
+stage
+
+REPOSITORIO LOCAL vs REMOTO
+Gut tiene dos repositorios local y remoto, servidor y descarga y luego sube al repositorio
+BRANCHING//ramas
+Permite a los usuarios trabjar en codigo independiente sin afectar el codigo principal pueden ser locales y remotos
+la utilidad es poder revisar los cambios y modificaciones 
+es facil de crear y el usuairo pasa de una rama a otra, el codgio de los archivos cambia automatica,, commmit desaparece la rama
+
+OTROS PROVEEDORES
+GITHUB
+servicio que proporciona microsoft
+colaboradores s epueden unir a aumentar al archivo
+
+###instalacion###  
+
+####codigo html, javascript###
+
+git config --global user.name ""
+git config --global user.name ""
+
+mkdir carpetagit
+cd carpetagit
+ git init
+ls -a
+///git es donde esta el repositorio de control de versiones
+git status
+//crear un archivo con mensaje
+echo "" >> archivo1.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+//pasar al repositorio para tener backup
+git commit -m "esto es sobre la colada morada"
+
+//ver repositorios qye tengo
+git log
+
+//modificar ese archivo
+
+
+
+
+
+
+//ramas
+
+git branch
+git branch rama1
+//cambiar rama
+git checkout rama1
+
+//modificar archivo
+echo "vamos a tomar" >> archivo1.txt
+
+//
+//unir archivos
+git merge rama1
+//borrar ramas
+git branch -d rama1
+//ahi se une a una sola rama
+
+//generar cnoflicto
+//crear rama
+
+

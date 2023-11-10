@@ -1,0 +1,26 @@
+(root)
+1. systemctl status sshd 
+2. vi /etc/ssh/sshd_config
+linea 44
+AllowUsers prueba1 prueba2 prueba3
+:wq
+
+3. which chmod
+   which systemctl 
+   which chown
+   whcih userdel
+
+4. visudo 
+linea 100
+
+prueba3   ALL=(ALL)   NOPASSWD: (aqui entra los comando)
+:wq
+
+(prueba3) 
+1. nano ~/bashrc
+(al final)
+
+alias systemctl="sudo systemctl"
+alias  chmod= "sudo chmod"
+
+(guardar) 

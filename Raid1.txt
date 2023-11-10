@@ -1,0 +1,121 @@
+RAIDS
+configuracion de raid server
+tECNOLOGIA QUE COMBINA MULTIPLES DISCOS DUROS O SOLIDO SSD EN UN SOLO CONJUNTO.
+Divide datos en bloques y genera varios discos, se gana veocidad en lectura y envia de infromacoion, si uno se daña se pierde la infromacion
+
+Configuracion de raid 1
+AL¿lmacenamiento en espejo, se tiene dos discos, en unos e guarda infromacion y respaldo 
+
+raid 5
+
+Distribuye discos y la paridad, si se daña uno el otro reconstruye la informacion 
+proporcion equilibro entre rendimiento y redundancia la paridad se guarda en cualquier disco
+
+Raid 6 dos bloques de paridad distribuidas
+
+raid 1 0
+combinacion de raids, se divide en bloques y se duplican en discos separados
+
+############RAID POR CONSOLA ############
+
+Vamos a la maquina cualquiera donde anadimos dos discos de 1 Gb
+///se ve los discos por bloques
+lblsk
+//formateamos como root
+ fdisk /dev/nvme0n2
+n //generar neuva particion
+p //seleccionar particion primaria
+1
+enter 
+enter
+
+t // seleccionar el tipo de formato
+l //listado de formatos que se puede dar
+
+FD //es de raid
+p  //infromacion del disco
+w // escribir en el disco
+
+fdsik -l // para ver las particiones
+
+//instar para administrar raids
+
+dnf install -y mdadm
+//CREACION DE RAID
+el menos l es para el nivel en este caso 1 // n discos que vamos adicionar 
+mdadm -C /dev/md0 -l 1 -n 2 /dev/nvme0n2p1 /dev/nvme0n3p1
+yes
+// Para ver la creacion de los raids
+cat /proc/mdstat
+
+//podemos ver que pertenecen al mismo raid
+
+Dar formato al raid
+
+//
+mkfs.ext4 /dev/md0
+// cargar los discos a un carpeta mnt
+mount /dev/md0 /mnt/
+ //sacar respaldo de archivo y poner en carpeta mnt tar es para comprimir informacion, saca de carpeta etc lo cpmrime y guarda en mnt 
+tar zcf /mnt/backup-etc.tar.gz /etc/
+
+//declarar falla en disco por consola
+lsblk
+
+mdadm -f /dev/md0 /dev/nvme0n3p1
+ //ahi aparece que solo uno esta activo
+//remover disco
+
+mdadm -r /dev/md0 /dev/nvme0n3p1
+
+
+//sacamos respaldo 2
+
+tar zcf /mnt/backup2-etc.tar.gz /etc/
+
+//replicar infromacion del [rimero al segundo nuevo
+sfdisk -d /dev/nvme0n2p1 | sfdisk /dev/nvme0n3p1 
+
+//a;adir disco 3 al raid md0
+mdadm -a /dev/md0 /dev/nvme0n3p1
+------
+// Borrar raidsp para no tener redundancia
+//desmonatar raid
+umount /dev/md0
+//parar
+mdadm --stop /dev/md0
+//limpiar informacion
+mdadm --zero-superblock /dev/nvme0n2p1
+mdadm --zero-superblock /dev/nvme0n3p1
+
+
+
+##### INVESTIGACION PAR HACER RAID 5 ##########
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/// en la maquina raid ponemos
+cat /proc/mdstat
+
+

@@ -1,0 +1,101 @@
+conexion
+a ssh por clave publica y privada
+
+
+ssh-keygen
+enter
+en vez de clave se pone frase 
+luego encirptamos
+holaromario frase
+
+ls -l.ssh     muestra claves publica y privada
+
+cat .ssh/id_rsa
+cd .ssh
+ls -la
+
+
+cat id_rsa.pub
+ 
+cat id_rsa.pub >> authorize_keys
+
+-------------powershell pc-------
+cd alex@192.168...:/home:alex/
+
+
+
+chmod 777 authorize_keys
+sudo nano /etc/ssh/sshd_config
+
+
+passwordaithentication no
+
+sudo systemctl restart sshd
+
+ls
+id_rsa.pub
+
+passwordauthentication yes
+sudo systemctl restart sshd 
+
+pc--puttygen
+load
+save private key
+
+----puttty----
+SSH/AUTH/Credentials
+---------------
+clave frase 
+
+vamos a servidor vmware
+
+gpasswd -a prueba wheel 
+systemctl restart sshd
+
+ssh-keygen
+cd .ssh
+
+
+
+
+
+
+
+
+
+
+ls
+cd .ssh
+lc_rsa
+rm 
+
+cd
+ssh-keygen
+
+
+
+
+
+
+
+
+
+
+\\\
+\|||
+
+\
+\
+\
+\
+\
+\
+
+
+cd .ssh/
+ls
+cat id_rsa.pub >> authorized_keys
+chmod 775 authorized_keys
+chmod 777 ls_rsa
+
+copiamos al powershell

@@ -1,0 +1,181 @@
+Instalacion servidor wb
+
+dnf install -y httpd mod_ssl///  dnf install -y httpd mod-ssl
+
+
+systemctl status httpd
+sustemctl start httpd
+systemctl enable httpd
+
+status otra vez
+firewall-cmd --permanent --add-service=http
+firewall-cmd --permanent --add-service=https
+firewall-cmd --reload
+
+NAVEGADOR
+direccion ip del servidor para ver si funciona apache
+192.168.116.129
+
+
+
+Instalacion dersvicio de base de datos mariadb
+
+control l
+
+dnf install mariadb -y
+yes
+
+control l
+systemctl status mariadb
+
+systemctl start mariadb
+
+oinstalacion
+dnf install mariadb-server -y
+
+revisamos estado
+systemctl start mariadb
+systemctl status mariadb
+systemctl enable mariadb/// para que se quede activo
+
+SEGURIDA
+mysql_secure_installation 
+enter
+yes
+contrasena 1234
+yes
+no
+
+yes
+
+
+probamos que funciona el servicio
+mysql - u root -p
+1234
+
+ahi entra a maria db
+ show databases;
+
+ingresa
+
+
+
+
+INSTALACION DE MODULO PHP
+SALIMOS A ROOT
+
+sudo yum install php php-mysqlnd
+
+Reiniciamos apache
+systemctl restart httpd
+php -v ///para ver la version   version 8.0.30
+
+creamos un pagina en php se guardan por defecto 
+
+
+control L
+cd /var/www/html/
+ls
+las paginas se guardan ahi porque por defecto apunta a esta direccion
+instalar editor nano
+
+ //archivo de configuracion de apache
+
+entra a letras azules
+buscamos document root, podriamos cambiar servcicio de esuchar
+
+DocumenRoot "/var/www/html"
+salimos control x
+
+
+pwd
+nano info.php           //generar un archivo para ver si esta habilitado el modulo/ termina extension php
+
+insertar condigo php en esa ventana
+<?php
+phpinfo();
+?>
+guardamos control x yes
+
+
+NAVEGADOR
+
+http://192.168.116.129/info.php
+
+responde y vemos que esta habilitado, se puede ver variables del sistema
+
+
+
+instalar algo que no seee
+
+
+
+systemctl restart httpd
+ls
+nano /etc/httpd/
+
+NAVEGADOR
+direcion/phpmyadmin
+
+
+hay que entrar para habilitar phpmyadmin
+
+en letras azules al utlizar
+
+
+
+
+
+
+
+en root cd /etc/httpd/conf.d/
+ls
+
+cp phpMyAdmin.conf  phpmyadmin_respaldp
+ls
+
+
+
+
+crear archivo en blanco y pegar lo que mando el companero
+
+
+
+ahi vale y entramos a phpMyAdmin
+
+root 
+1234
+
+
+TRABAJO CONSULTAR ACERCA DE .
+CAMBIO CARPETA
+
+CD /VAR/WWW/HTML
+LS
+ mkdir descargas 
+ls
+
+cd descargas/
+ls
+touch archivo.txt
+ls
+
+ip /descargas
+blouqear para que solo los usuarios puedan ingresar a la carpeta
+se hace a traves de configuracion de archivo  .htacces
+configuar la seguridad para que no se muetsre en .htacces donde me pida clave
+y esta clave debe estar enlazada solo usuarios del sistema
+consultar la autenticacion con PAM
+
+
+consultar virtual host
+generar dos paginas diferentes nombre y apellido en un pagina
+y la otra segundo nombre y segundo apellido
+acceder a diferenetes dominios con misma direccion ip
+
+
+
+algo mas y entramos
+\
+
+borramos todo el archivo

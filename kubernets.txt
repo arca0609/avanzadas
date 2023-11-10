@@ -1,0 +1,137 @@
+kubernetes
+
+*Instalacion de MicroK8s Kubernetes
+
+*Habilitamos el repositorio EPEL
+
+sudo dnf update
+
+sudo dnf install epel-release
+
+*Instalamos snapd
+
+sudo dnf install snapd
+
+*Crear un enlace simb´olico para la compatibilidad con complementos 
+
+sudo ln -s /var/lib/snapd/snap /snap
+
+*Exporte las instantaneas ’PATH.
+
+echo 'export PATH=$PATH:/var/lib/snapd/snap/bin' | sudo tee -a /etc/profile.d/snap.sh
+
+source /etc/profile.d/snap.sh
+
+*Iniciamos y habilitamos el servicio:
+
+sudo systemctl enable --now snapd.socket
+
+*Comprobamos el estado del servicio
+systemctl status snapd.socket
+
+*Configuramos SELinux en modo permisivo:
+
+sudo setenforce 0
+sudo sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
+
+*Instalamos Microk8s con los siguientes comandos:
+
+sudo snap install microk8s --classic (intentar dos veces)
+
+
+*Para poder ejecutar los comandos sin problemas, debe configurar los 
+siguientes permisos:
+
+sudo usermod -a -G microk8s $USER
+sudo chown -f -R $USER ~/.kube
+
+*Ejecutamos los comandos con:
+newgrp microk8s
+
+*Reiniciamos la maquina
+init 6
+
+*Verificamos el estado de Microk8s
+microk8s status
+
+*Observamos los nodos disponibles
+microk8s kubectl get nodes
+
+*Observamos la version de kubectl en Microk8s
+microk8s kubectl
+
+*Obtenemos las configuraciones del Mikrok8s con la sentencia:
+microk8s config
+
+
+*Instale kubectl en Rocky Linux 9/AlmaLinux 9 usando el comando:
+
+curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+
+sudo chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+
+*Generamos la configuraci´on requerida
+cd $HOME
+microk8s config > ~/.kube/config
+
+*Observamos los nodos disponibles
+kubectl get nodes
+
+
+Incorporacion de nodos al cl´uster Microk8s
+Requisitos:
+Maquina 1 Alma Linux 9: Nodo Master
+Maquina 2 Alma Linux 9: Nodo esclavo
+En todas las m´aquinas se debe tener instalado hasta el paso anterior.
+En el nodo master, permita que los puertos requeridos pasen a traves del firewall:
+sudo firewall-cmd --add-port=25000/tcp --permanent
+sudo firewall-cmd --add-port=16443/tcp --permanent
+sudo firewall-cmd --add-port=12379/tcp --permanent
+sudo firewall-cmd --add-port=10250/tcp --permanent
+sudo firewall-cmd --add-port=10255/tcp --permanent
+sudo firewall-cmd --add-port=10257/tcp --permanent
+sudo firewall-cmd --add-port=10259/tcp --permanent
+
+sudo firewall-cmd --reload
+
+*Añada en la direccion /etc/hosts la direccion ip del nodo esclavo
+
+nano /etc/hosts
+
+192.168.41.131 localhost.localdomain
+
+*Genere el comando que utilizaran los nodos para unirse al cluster
+
+ microk8s add-node
+
+ 
+microk8s join 192.168.41.130:25000/a3015285b89db32be5facb63c953e3e2/77c2d64ebe5b --worker
+
+*Ahora en el nodo esclavo (M´aquina 2) despu´es de instalar Microk8s en el nodo esclavo, configuramos
+lo siguiente:
+
+export OPENSSL_CONF=/var/lib/snapd/snap/microk8s/current/etc/ssl/openssl.cnf
+sudo firewall-cmd --add-port=25000/tcp --permanent
+sudo firewall-cmd --add-port=16443/tcp --permanent
+sudo firewall-cmd --add-port=12379/tcp --permanent
+sudo firewall-cmd --add-port=10250/tcp --permanent
+sudo firewall-cmd --add-port=10255/tcp --permanent
+sudo firewall-cmd --add-port=10257/tcp --permanent
+sudo firewall-cmd --add-port=10259/tcp --permanent
+
+sudo firewall-cmd --reload
+
+Añada en la direccion /etc/hosts la direccion ip del nodo esclavo
+nano /etc/hosts
+
+192.168.111.141 localhost.localdomain
+
+Ahora use el comando generado en el maestro para unir los nodos al cl´uster Microk8s.
+microk8s join 192.168.111.140:25000/f2f192e0f13b08db06ef6090952584fa/998ff4d2dbe2 --worker
+
+*Para comprobar  
+kubectl get nodes
+
+
+

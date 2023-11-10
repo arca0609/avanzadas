@@ -1,0 +1,61 @@
+a)Instalar Docker Compose en AlmaLinux:
+	sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+	sudo curl -L "https://github.com/docker/compose/releases/download/2.20.2/docker-compose-Linux-x86_64" -o /usr/local/bin/docker-compose
+
+b)asigna permisos de ejecución al binario de Docker compose:
+	sudo chmod +x /usr/local/bin/docker-compose
+
+c)Verifica que Docker Compose se haya instalado correctamente:
+	docker-compose --version
+
+d)Crear un directorio de trabajo 
+	mkdir docker_wordpress
+e)Crear el archivo docker-compose.yml
+	touch docker-compose.yml
+	----nano docker-compose.yml----
+	version: '3.9'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: db_wordpress
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppassword
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wp_app
+    restart: always
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppassword
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wp_data:/var/www/html
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+  wp_data:
+
+f)Ejecutar la aplicación con Docker Compose
+Ahora, estamos listos para ejecutar nuestra aplicación utilizando Docker Compose. Abre una terminal y asegúrate de estar en el mismo directorio que el archivo docker-compose.yml.
+Ejecuta el siguiente comando para construir las imágenes y ejecutar los servicios:
+	docker-compose up -d
+
+g)Verificar la aplicación
+Una vez que los servicios estén en funcionamiento, puedes abrir tu navegador web y acceder a http://localhost:8000 para ver la aplicación "Hola Mundo" funcionando desde Docker Compose en AlmaLinux.
+h)Detener y eliminar los servicios (opcional)
+Si deseas detener y eliminar los servicios después de probarlos, puedes ejecutar el siguiente comando:
+	docker-compose down
+

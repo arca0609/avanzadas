@@ -1,0 +1,226 @@
+sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+sudo dnf install docker-ce --nobest
+docker -v #version
+docker -h #opciones
+docker images #ver las imagenes
+systemctl start docker
+systemctl status docker
+systemctl enable docker #para mantener encendido despues de haber apagado la maquina
+docker search ubuntu #buscar 
+docker pull ubuntu #instalar
+docker pull ubuntu: y el tag (para version especifica)
+docker inspect ubuntu
+docker run ubuntu
+docker run ubuntu echo "hello word"
+docker ps -a #ver lo hecho
+docker run --name archivo1 ubuntu echo "hola2"  #que tenga tambien nombre dado por nosotros
+docker run -it ubuntu /bin/bash # para quedar en el contenedor 
+cat /etc/lsb-release  # ver la version
+docker ps -a #ver lo hecho
+CONTAINER ID   IMAGE     COMMAND       CREATED          STATUS          PORTS     NAMES
+b86802a95c40   ubuntu    "/bin/bash"   47 seconds ago   Up 45 seconds             beautiful_neumann
+docker exec -it b86802a95c40 /bin/sh # conectado al contenedor para # (todos se conectan a root)
+exit
+docker start b86802a95c40 #para inicializarle
+docker exec -it b86802a95c40 /bin/sh
+apt-get install update
+apt-get install git
+exit
+
+docker commit -m "git" -a "victor" b86802a95c40 git/ubuntu:v1
+sha256:629eae543a30e5ed8f018424f24d8a0dbe2ef6edf09f14f3bf6ea8d2a4702b9b
+docker run -it --name git git/ubuntu:v1
+
+docker run -it --name GIT git/ubuntu:v1
+dpkg -1 | grep git
+
+docker run -it --name apache ubuntu /bin/bash
+#############ubuntu#########
+apt-get update
+apt-get install apache2 -y
+
+service apache2 start
+service apache2 status
+
+docker commit -m "Install apache" -a "USER1" 715b139a0797 apache/ubuntu:v1
+
+docker image //generada imagen
+
+///////////genera contenedor backround ==
+
+docker run -d --name server apache/ubuntu:v1 /usr/sbin/apache2ctl -D FOREGROUND 
+docker ps 		//-d segundo plano exec
+
+
+docker exec -it server /bin/sh		//ejecuta un shell o comandos cmd
+==========container server=========
+apt-get update
+apt-get install curl
+curl http://127.0.0.1 
+
+===========================
+docker stop server
+
+docker ps -a
+docker rm server
+
+
+//mapear puertos//8000 exponer servicio 80
+
+docker run -d -p 8000:80 --name server apache/ubuntu:v1 /usr/sbin/apache2ctl -D FOREGROUND
+docker ps  //se expone el puerto 80 al 8000
++++++++++++NAVEGADOR++++++++++++
+http://192.168.11.129:8000/
++++++++++++++++++++++++++++++++++++
+service apache2 stop
+===========
+docker ps -a
+docker rm server
+docker network ls
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1  useradd prueba2
+    2  passwd prueba2
+    3  useradd prueba3
+    4  passwd prueba3
+    5  visudo
+    6  exit
+    7  visudo
+    8  exit
+    9  exit
+   10  witch tar
+   11  which tar
+   12  who
+   13  who -a
+   14  exit
+   15  visudo
+   16  ip add
+   17  history
+   18  useradd deber1
+   19  passwd deber1
+   20  who
+   21  init 0
+   22  visudo
+   23  nano /etc/ssh/sshd_config
+   24  systemctl restart sshd
+   25  visudo
+   26  nano /etc/ssh/sshd_config
+   27  visudo
+   28  nano /etc/ssh/sshd_config
+   29  ip add
+   30  init 0
+   31  visudo
+   32  useradd Victor
+   33  passwd Victor
+   34  visudo
+   35  nano /ect/ssh/sshd_config
+   36  nano /etc/ssh/sshd_config
+   37  systemctl restart sshd
+   38  visudo
+   39  mkdir scripts
+   40  ls
+   41  nano scripts
+   42  cd scripts/
+   43  vi ejemplo01.sh
+   44  ls -l
+   45  chmod a+x ejemplo01.sh
+   46  ./ejemplo01.sh
+   47  vi ejemplo02.sh
+   48  ./ejemplo02.sh
+   49  chmod a+x ejemplo02.sh
+   50  ./ejemplo02.sh
+   51  vi ejemplo03.sh
+   52  chmod a+x ejemplo03.sh
+   53  ./ejemplo03.sh
+   54  date +%d
+   55  date +%d%m%y
+   56  history
+   57  cat /etc/sysconfig/network-scripts
+   58  ls
+   59  cat /etc/sysconfig/network-scripts
+   60  cd /etc/sysconfig/network-scripts
+   61  ip add
+   62  vi ifcfg-ens160
+   63  vi ifcfg-ens161
+   64  history
+   65  ipadd
+   66  ip add
+   67  init
+   68  init 0
+   69  ip add
+   70  init 0
+   71  ip add
+   72  init 6
+   73  vi ifcfg-ens161
+   74  ip add
+   75  vi ifcfg-ens256
+   76  vi ifcfg-ens161
+   77  cd /etc/sysconfig/network-scripts/
+   78  ls
+   79  vi ifcfg-ens161
+   80  vi ifcfg-ens160
+   81  vi ifcfg-ens256
+   82  ip link set ens256 down
+   83  ip link set ens256 up
+   84  ip add
+   85  systemctl restart NetworkManager
+   86  ip link set ens256 down
+   87  ip link set ens256 up
+   88  ip add
+   89  vi ifcfg-ens256
+   90  systemctl restart NetworkManager
+   91  ip link set ens256 down
+   92  ip link set ens256 up
+   93  ip add
+   94  vi ifcfg-ens256
+   95  ip add
+   96  ifconfig
+   97  vi ifcfg-ens256
+   98  cd /etc/sysconfig/network-scripts/
+   99  vi ifcfg-ens256
+  100  systemctl restart NetworkManager
+  101  ip link set ens256 down
+  102  ip link set ens256 up
+  103  ip add
+  104  vi ifcfg-ens256
+  105  systemctl restart NetworkManager
+  106  ip link set ens256 down
+  107  ip link set ens256 up
+  108  ip add
+  109  vi ifcfg-ens256
+  110  systemctl restart NetworkManager
+  111  ip link set ens256 down
+  112  ip link set ens256 up
+  113  ip add
+  114  vi ifcfg-ens256
+  115  ip add
+  116  init 6
+  117  ip add
+  118  init 0
+  119  ip dd
+  120  ip add
+  121  cd /etc/sysconfig/network-scripts/
+  122  vi ifcfg-ens256
+  123  systemctl restart NetworkManager
+  124  ip link set ens256 down
+  125  ip link set ens256 up
+  126  init 6
+  127  docker ps
+  128  docker exec -it b86802a95c40 /bin/sh
+  129  history
+
+
+
